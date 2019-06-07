@@ -20,10 +20,13 @@ Um editor de texto
 ### Instalação
 
 Como colocar as coisas
+
 Comecem instalando o famoso NPM
+
 Para Ubuntu:
 
 Instalando nodejs:
+
 ```
 sudo apt update
 sudo apt install nodejs
@@ -31,27 +34,37 @@ sudo apt install nodejs
 nodejs --version
 
 ```
+
 Agora Instalando o npm:
+
 ```
 sudo apt install npm
 //testando a versao pra ver se rolou tudo certo
 npm --version
 ```
+
 Show, agora vamo instalar o ionic
+
 ```
 npm install -g ionic
 ```
+
 Agora vocês vao pra a pasta do projeto, la dentro vcs usam um
+
 ```
 npm install
 ```
+
 Este comando irá instalar todos os pacotes q estao no nosso package.json, estes que sao necessarios para nosso projetinho rodar
+
 ## Rodando o projeto
 
 Para rodar o projeto basta estar na pasta e mandar um
+
 ```
 ionic serve
 ```
+
 no terminal e SHOW DE BOLA, ele vai abrir uma aba no navegador padrao no http://localhost:8100/
 
 ### Observações

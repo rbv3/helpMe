@@ -19,9 +19,9 @@ Um editor de texto
 
 ### Instalação
 
-Como colocar as coisas
+(Não vou falar como instalar um editor, mas recomendo o vscode)
 
-Comecem instalando o famoso NPM
+Comecem instalando o famoso NodeJS + NPM
 
 Para Ubuntu:
 

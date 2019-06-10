@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {HttpClientModule} from '@angular/common/http';
 import leaflet from 'leaflet'; 
 import * as $ from 'jquery'
+import { LocationService } from '../services/location.service'
 
 
 @Component({
@@ -13,14 +14,19 @@ import * as $ from 'jquery'
 export class Tab2Page {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
-  constructor() {
+  constructor(
+    private locationService: LocationService
+  ) {
   }
+
   //ao carregar nossa pagina, execute o loadMap
   ionViewDidEnter() {
     this.loadmap();
   }
 
+  
   loadmap() {
+    // console.log(this.locationService.getCoordinates())
     //onde definimos os nossos marcadores, para inserir uma cor nova, basta mudar o final da URL do atributo iconUrl
     var greenIcon = new leaflet.Icon({
       iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
@@ -65,6 +71,8 @@ export class Tab2Page {
         //salvamos lat e lon pra usar posteriormete
         let lat = e.latitude;
         let lon = e.longitude;
+        console.log('cu');
+        console.log(this.locationService.getCoordinates(lat, lon));
         //requisiçao para obter endereço aproximado de nosso marcador
         $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + lat + '&lon=' + lon, (data) => {
           alert("Endereço próximo: " + data.address.road);

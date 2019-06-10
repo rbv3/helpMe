@@ -71,8 +71,8 @@ export class Tab2Page {
         //salvamos lat e lon pra usar posteriormete
         let lat = e.latitude;
         let lon = e.longitude;
-        console.log('cu');
-        console.log(this.locationService.getCoordinates(lat, lon));
+        console.log('cu'); // isso n ta sendo printado @deus pq
+        console.log(this.locationService.getCoordinates(lat, lon)); // isso era pra funcionar nem q fosse um array vazio
         //requisiçao para obter endereço aproximado de nosso marcador
         $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + lat + '&lon=' + lon, (data) => {
           alert("Endereço próximo: " + data.address.road);

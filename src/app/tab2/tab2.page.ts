@@ -65,14 +65,23 @@ export class Tab2Page {
       setView: true,
       maxZoom: 10
     }).on('locationfound', (e) => {
-      console.log(e)
+      console.log(e) 
       let markerGroup = leaflet.featureGroup();
-      let marker: any = leaflet.marker([e.latitude, e.longitude], {icon: redIcon}).on('click', () => {
+      // const data = {
+      //   x: e.latitude,
+      //   y: e.longitude,
+      //   radius: 10.0,
+      //   ago: 3600
+      // }
+      // console.log('teste');
+      // this.locationService.post('https://helpmeback.herokuapp.com/get_near_alarms', data).then((res) => {
+      //   console.log(res);
+      // });
+      let marker: any = leaflet.marker([e.latitude, e.longitude], {icon: redIcon}).on('click', () => { // nao ta entrando aqui
         //salvamos lat e lon pra usar posteriormete
         let lat = e.latitude;
         let lon = e.longitude;
-        console.log('cu'); // isso n ta sendo printado @deus pq
-        console.log(this.locationService.getCoordinates(lat, lon)); // isso era pra funcionar nem q fosse um array vazio
+
         //requisiçao para obter endereço aproximado de nosso marcador
         $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + lat + '&lon=' + lon, (data) => {
           alert("Endereço próximo: " + data.address.road);

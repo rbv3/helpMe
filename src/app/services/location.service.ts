@@ -1,4 +1,4 @@
-declare var require: any;
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class LocationService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  async getCoordinates(lat, long) {
-    console.log('teste')
-    const axios = require('axios')
-    const coordinates = await axios.$post('https://helpmeback.herokuapp.com/get_near_alarms', { x: lat, y: long, radius: 10.0, ago: 10 })
-    return coordinates
+  async post(url: string, data: Object) {
+    return await this.http.post(url, data)
+    // console.log('teste')
+    // const axios = require('axios')
+    // const coordinates = await axios.$post('https://helpmeback.herokuapp.com/get_near_alarms', { x: lat, y: long, radius: 10.0, ago: 10 })
+    // return coordinates
   }
 }

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {HttpClientModule} from '@angular/common/http';
 import leaflet from 'leaflet'; 
 import * as $ from 'jquery'
+//importa o service q deseja-se utilizar
 import { LocationService } from '../services/location.service'
 
 
@@ -14,6 +15,7 @@ import { LocationService } from '../services/location.service'
 export class Tab2Page {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
+  //dentro do constructor, declarar o service como variavel global 'private'
   constructor(
     private locationService: LocationService
   ) {}
@@ -28,6 +30,7 @@ export class Tab2Page {
       "ago": 0
     };
     console.log(this.locationService)
+    //usa assim, lembrar q caso o retorno seja um Observable (como neste caso é), usar .subscriber para ler o retorno devidamente
     this.locationService.getNearAlarms(a)
       .subscribe(res=>{
         console.log(res)

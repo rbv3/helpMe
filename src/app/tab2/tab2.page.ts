@@ -16,17 +16,26 @@ export class Tab2Page {
   map: any;
   constructor(
     private locationService: LocationService
-  ) {
-  }
+  ) {}
 
   //ao carregar nossa pagina, execute o loadMap
   ionViewDidEnter() {
     this.loadmap();
+    let a = {
+      "x": 0,
+      "y": 0,
+      "radius": 0,
+      "ago": 0
+    };
+    console.log(this.locationService)
+    this.locationService.getNearAlarms(a)
+      .subscribe(res=>{
+        console.log(res)
+      })
   }
 
   
   loadmap() {
-    // console.log(this.locationService.getCoordinates())
     //onde definimos os nossos marcadores, para inserir uma cor nova, basta mudar o final da URL do atributo iconUrl
     var greenIcon = new leaflet.Icon({
       iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
@@ -65,7 +74,7 @@ export class Tab2Page {
       setView: true,
       maxZoom: 10
     }).on('locationfound', (e) => {
-      console.log(e) 
+      // console.log(e) 
       let markerGroup = leaflet.featureGroup();
       // const data = {
       //   x: e.latitude,

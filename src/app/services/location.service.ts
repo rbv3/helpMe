@@ -16,4 +16,7 @@ export class LocationService {
     //chama-se o tipo do metodo, nesse caso post, com a url + o endpoint, e o corpo da requisiçao como parametros
     return this.http.post(this.url + '/get_near_alarms', data)
   }
+  createAlarms(data){
+    return this.http.post(this.url + '/create_alarm', data);
+  }
 }

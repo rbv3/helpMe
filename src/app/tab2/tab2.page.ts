@@ -150,13 +150,6 @@ export class Tab2Page {
           });
           
           this.map.addLayer(markerGroupFor);
-          console.log(Object.keys(res.alarms).length)
-          if (Object.keys(res.alarms).length) {
-            console.log("OPA MEU QUERIDO")
-          }
-          else {
-            console.log("ta tudo certo, bb")
-          }
         })
 
       let markerGroupAux = leaflet.featureGroup();

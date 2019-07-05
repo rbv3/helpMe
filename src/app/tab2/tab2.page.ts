@@ -52,6 +52,8 @@ export class Tab2Page {
     // this.locationService.createAlarms(x2).subscribe(res=>{
     //   console.log(res)
     // })
+
+
     // console.log(this.locationService)
     //usa assim, lembrar q caso o retorno seja um Observable (como neste caso é), usar .subscriber para ler o retorno devidamente
     // this.locationService.getNearAlarms(a)
@@ -99,16 +101,17 @@ export class Tab2Page {
 
     //apenas um exemplo que podemos trabalhar com mais de um marcador, no caso, este é um marcador hardcoded mesmo
 
-    let markerGroup = leaflet.featureGroup();
-    let marker2: any = leaflet.marker([-8.0439712, -34.9106228, 15], { icon: blueIcon }).on('click', () => {
-      alert('Marker clicked');
-      $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + -8.0439712 + '&lon=' + -34.9128115 + '', (data) => {
-        alert("Endereço próximo: " + data.address.road);
-      });
-    })
+    //exemplo comentado de como adicionar marker
+    // let markerGroup = leaflet.featureGroup();
+    // let marker2: any = leaflet.marker([-8.0439712, -34.9106228, 15], { icon: blueIcon }).on('click', () => {
+    //   alert('Marker clicked');
+    //   $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + -8.0439712 + '&lon=' + -34.9128115 + '', (data) => {
+    //     alert("Endereço próximo: " + data.address.road);
+    //   });
+    // })
     //aqui, adicionamos nossos 2 marcadores a um markerGroup
-    markerGroup.addLayer(marker2);
-    this.map.addLayer(markerGroup);
+    // markerGroup.addLayer(marker2);
+    // this.map.addLayer(markerGroup);
     //por fim, colocamos o grupo de marcadores no nosso mapa
 
 
@@ -125,11 +128,28 @@ export class Tab2Page {
       };
       aux.x = e.latitude;
       aux.y = e.longitude;
-      aux.radius = 0.01;
-      aux.ago = 40;
-      console.log(aux)
+      aux.radius = 0.1;
+      aux.ago = 20;
       this.locationService.getNearAlarms(aux)
         .subscribe((res: any) => {
+          let markerGroupFor = leaflet.featureGroup();
+          res.alarms.forEach(element => {
+            let x = element.x;
+            let y = element.y;
+            let marker = leaflet.marker([x, y], { icon: redIcon }).on('click', () => {
+              //salvamos lat e lon pra usar posteriormete
+              let lat = x;
+              let lon = y;
+      
+              //requisiçao para obter endereço aproximado de nosso marcador
+              $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + lat + '&lon=' + lon, (data) => {
+                alert("Endereço próximo: " + data.address.road);
+              });
+            })
+            markerGroupFor.addLayer(marker);
+          });
+          
+          this.map.addLayer(markerGroupFor);
           console.log(Object.keys(res.alarms).length)
           if (Object.keys(res.alarms).length) {
             console.log("OPA MEU QUERIDO")
@@ -151,7 +171,7 @@ export class Tab2Page {
       //   console.log(res);
       // });
       if(this.userMarker) this.map.removeLayer(this.userMarker)
-      this.userMarker = leaflet.marker([e.latitude, e.longitude], { icon: redIcon }).on('click', () => {
+      this.userMarker = leaflet.marker([e.latitude, e.longitude], { icon: blueIcon }).on('click', () => {
         //salvamos lat e lon pra usar posteriormete
         let lat = e.latitude;
         let lon = e.longitude;
